@@ -1,0 +1,12 @@
+extends base.pug
+include mixins/video.pug
+
+
+block content 
+
+    a(href="/videos/upload")="UPLOAD"
+
+    each video in videos 
+        +video(video)
+    else 
+        li Nothing Found

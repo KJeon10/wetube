@@ -4,7 +4,7 @@
   "description": "The best way to watch videos",
   "main": "index.js",
   "scripts": {
-    "win": "nodemon --exec babel-node src/server.js"
+    "win": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   "homepage": "https://github.com/KJeon10/wetube#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "morgan": "^1.10.0"
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
@@ -26,5 +28,5 @@
     "@babel/preset-env": "^7.16.11",
     "nodemon": "^2.0.15"
   },
-  "type":"module"
+  "type": "module"
 }

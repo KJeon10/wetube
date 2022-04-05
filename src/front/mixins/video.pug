@@ -1,0 +1,11 @@
+mixin video(info)
+    div 
+        h4 
+            a(href="/videos/:id")=info.title
+        ul 
+            li=info.title
+            li=info.description
+            li=info.meta.views 
+            li=info.createdAt 
+            li=info.hashtags 
+            li=info.meta.rating 

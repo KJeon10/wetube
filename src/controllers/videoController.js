@@ -36,11 +36,22 @@ export const postEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags,
+    hashtags: Video.formatHashtags(hashtags),
   });
   return res.redirect(`/videos/${id}`);
 };
-export const search = (req, res) => res.send("search");
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  if (keyword) {
+    const videos = await Video.find({
+      title: {
+        $regex: new RegExp(keyword, "i"),
+      },
+    });
+    return res.render("search", { pageTitle: "Search", videos });
+  }
+  return res.render("search", { pageTitle: "Search", videos: [] });
+};
 
 export const remove = (req, res) => res.send("remove");
 
@@ -52,7 +63,7 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      hashtags,
+      hashtags: Video.formatHashtags(hashtags),
       meta: {
         views: 0,
         rating: 0,
@@ -66,4 +77,12 @@ export const postUpload = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  await Video.findByIdAndDelete(id);
+  // delete video
+  return res.redirect("/");
 };

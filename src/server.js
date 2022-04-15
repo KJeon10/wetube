@@ -25,6 +25,8 @@ app.use(
   })
 );
 app.use(localsMiddleware);
+app.use("/uploads/avatars", express.static("uploads/avatars"));
+app.use("/uploads/videos", express.static("uploads/videos"));
 app.use("/", globalRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);

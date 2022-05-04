@@ -10,4 +10,7 @@ block content
         each video in videos 
             +video(video)
         else 
-            span.empty__message No Videos Found
+            if keyword == undefined
+                span.empty__message Initsearch
+            else 
+                span.empty__message No Videos Found

@@ -6,7 +6,6 @@ export const home = async (req, res) => {
     const videos = await Video.find()
       .sort({ createdAt: "desc" })
       .populate("owner");
-    console.log(res.locals.loggedInUser.avatarUrl);
     return res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     return res.render("404", { error });
@@ -56,15 +55,16 @@ export const postEdit = async (req, res) => {
 };
 export const search = async (req, res) => {
   const { keyword } = req.query;
+  console.log(keyword);
   if (keyword) {
     const videos = await Video.find({
       title: {
         $regex: new RegExp(keyword, "i"),
       },
     }).populate("owner");
-    return res.render("search", { pageTitle: "Search", videos });
+    return res.render("search", { pageTitle: "Search", videos, keyword });
   }
-  return res.render("search", { pageTitle: "Search", videos: [] });
+  return res.render("search", { pageTitle: "Search", videos: [], keyword });
 };
 
 export const remove = (req, res) => res.send("remove");

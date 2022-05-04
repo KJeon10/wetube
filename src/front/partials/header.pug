@@ -3,22 +3,27 @@ header
         i.fa-solid.fa-circle-play
     nav 
         ul 
+            li 
+                a(href="/search")
+                    i.fa-regular.fa-magnifying-glass
             if loggedIn 
-                hi Welcome, #{name}
                 li 
                     a(href="/users/logout") Logout
                 li 
-                    a(href=`/users/${loggedInUser._id}`) My Profile
+                    a(href=`/users/${loggedInUser._id}`)
+                        if loggedInUser.avatarUrl === undefined
+                            span :)
+                        else 
+                            img.header__avatar(src="/" + loggedInUser.avatarUrl)
                 li 
                     a(href="/users/edit") Edit Profile
                 li 
                     a(href="/videos/upload") Upload Video 
             else 
                 li 
-                    a(href="/login") Login
+                    a(href="/join").header__btn Join
                 li 
-                    a(href="/join") Join
+                    a(href="/login") Login
+
             li 
                 a(href="/") Home
-            li 
-                a(href="/search") Search
